@@ -7,7 +7,7 @@ import CardRoutes from "./routes/CardRoutes.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import path from "path";
-
+import cors from 'cors';
 dotenv.config();
 const app = express();
 
@@ -18,7 +18,12 @@ connectToMongo();
 
 app.use(express.json());
 app.use(cookieParser());
-
+app.use(cors({
+  origin: allowedOrigins,
+  methods: 'GET,POST,PUT,DELETE', // Adjust as needed
+  allowedHeaders: 'Content-Type,Authorization', // Add more headers if needed
+  credentials: true, // If you are using cookies, tokens, etc.
+}));
 const PORT = process.env.PORT || 3000;
 
 // Routes
