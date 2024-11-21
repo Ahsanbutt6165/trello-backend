@@ -20,11 +20,16 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "http://localhost:5173",
-    methods: "GET,POST,PUT,DELETE", // Adjust as needed
-    credentials: true, // If you are using cookies, tokens, etc.
+    origin: "http://localhost:5173", // Allow requests from your frontend
+    methods: ["GET", "POST", "PUT", "DELETE"], // List allowed HTTP methods
+    credentials: true, // Allow cookies and credentials
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With"], // Add necessary headers
   })
 );
+
+app.options("*", cors()); // Allow preflight requests for all routes
+
+
 const PORT = process.env.PORT || 3000;
 
 // Routes
