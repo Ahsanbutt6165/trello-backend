@@ -6,8 +6,6 @@ import {
   getUserTotalBoards,
   singleBoard,
   updateBoard,
-  // singleBoard,
-  // updateBoard,
 } from "../controllers/BoardController.js";
 import { isAuth } from "../middlewares/IsAuth.js";
 
@@ -18,6 +16,6 @@ router.get("/allboards", isAuth, allBoards);
 router.get("/totalboards", isAuth, getUserTotalBoards);
 router.get("/singleboard/:boardId", isAuth, singleBoard);
 router.delete("/boards/:id", isAuth, deleteBoard);
-router.put("/boards/:id", updateBoard);
+router.put("/boards/:id", isAuth, updateBoard);
 
 export default router;
