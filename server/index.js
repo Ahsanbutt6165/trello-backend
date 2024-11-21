@@ -1,6 +1,6 @@
 import express from "express";
-import boardRoutes from "./routes/boardRoutes.js";
-import taskRoutes from "./routes/taskRoutes.js";
+import BoardRoutes from "./routes/BoardRoutes.js";
+import TaskRoutes from "./routes/TaskRoutes.js";
 import UserRoutes from "./routes/UserRoutes.js";
 import connectToMongo from "./database/db.js";
 import CardRoutes from "./routes/CardRoutes.js";
@@ -20,9 +20,8 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
   cors({
-    origin: "*",
+    origin: "http://localhost:5173",
     methods: "GET,POST,PUT,DELETE", // Adjust as needed
-    allowedHeaders: "Content-Type,Authorization", // Add more headers if needed
     credentials: true, // If you are using cookies, tokens, etc.
   })
 );
@@ -30,10 +29,12 @@ const PORT = process.env.PORT || 3000;
 
 // Routes
 app.use("/api/user", UserRoutes);
-app.use("/api/board", boardRoutes);
-app.use("/api/tasks", taskRoutes);
+app.use("/api/board", BoardRoutes);
+app.use("/api/tasks", TaskRoutes);
 app.use("/api/card", CardRoutes);
-
+app.get("/", async (req, res) => {
+  res.send("working");
+});
 // Start the server
 app.listen(PORT, () => {
   console.log(`Both frontend and backend running on http://localhost:${PORT}`);
