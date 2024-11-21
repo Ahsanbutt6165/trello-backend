@@ -1,9 +1,9 @@
 import express from "express";
-import BoardRoutes from "./routes/BoardRoutes.js";
-import TaskRoutes from "./routes/TaskRoutes.js";
-import UserRoutes from "./routes/UserRoutes.js";
+import boardRoutes from "./routes/BoardRoutes.js";
+import taskRoutes from "./routes/TaskRoutes.js";
+import userRoutes from "./routes/UserRoutes.js";
 import connectToMongo from "./database/db.js";
-import CardRoutes from "./routes/CardRoutes.js";
+import cardRoutes from "./routes/CardRoutes.js";
 import dotenv from "dotenv";
 import cookieParser from "cookie-parser";
 import cors from "cors";
@@ -32,10 +32,10 @@ app.options("*", cors()); // Allow preflight requests for all routes
 const PORT = process.env.PORT || 3000;
 
 // Routes
-app.use("/api/user", UserRoutes);
-app.use("/api/board", BoardRoutes);
-app.use("/api/tasks", TaskRoutes);
-app.use("/api/card", CardRoutes);
+app.use("/api/user", userRoutes);
+app.use("/api/board", boardRoutes);
+app.use("/api/tasks", taskRoutes);
+app.use("/api/card", cardRoutes);
 app.get("/", async (req, res) => {
   res.send("working");
 });
